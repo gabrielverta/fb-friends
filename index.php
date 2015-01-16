@@ -25,10 +25,21 @@ class FB {
     public function getFriends()
     {
         $session = $this->login();
+        $request = new FacebookRequest($session, 'GET', '/me/friends');
+        return $request->execute()->getGraphObjectList();
+    }
+
+    /**
+     * @return mixed
+     * @throws \Facebook\FacebookRequestException
+     */
+    public function getTaggableFriends()
+    {
+        $session = $this->login();
         $request = new FacebookRequest($session, 'GET', '/me/taggable_friends');
         return $request->execute()->getGraphObjectList();
-
     }
+
 
     /**
      * Devolve a sessão atual do usuário ou redireciona para o login
@@ -81,4 +92,6 @@ class FB {
 
 $fb = new FB("APP_ID", "APP_SECRET");
 $friends = $fb->getFriends();
+var_dump($friends);
+$friends = $fb->getTaggableFriends();
 var_dump($friends);
