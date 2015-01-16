@@ -25,7 +25,7 @@ class FB {
     public function getFriends()
     {
         $session = $this->login();
-        $request = new FacebookRequest($session, 'GET', '/me/friends');
+        $request = new FacebookRequest($session, 'GET', '/me/taggable_friends');
         return $request->execute()->getGraphObjectList();
 
     }
